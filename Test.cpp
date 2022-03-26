@@ -15,7 +15,7 @@ using namespace ariel;
 
 TEST_CASE("length of the line is between 0-99"){
     Notebook note;
-    for (unsigned int i=100; i<200;i++){
+    for ( int i=100; i<200;i++){
         try
         {
             note.write(1,i-100,2,Direction::Vertical,"Look at me");
@@ -30,13 +30,22 @@ TEST_CASE("length of the line is between 0-99"){
         CHECK_THROWS(note.write(1,i-100,98,Direction::Horizontal,"abc"));
     }
 }
+TEST_CASE("case: special chars"){
+    Notebook note;
+    note.write(1,0,0,Direction::Horizontal,"n____n");
+    try{note.write(1,0,1,Direction::Horizontal,"abcd");}
+    catch(std::exception &){
+        CHECK_EQ(true,false);
+    }
+    CHECK_THROWS(note.write(1,1,1,Direction::Horizontal,"\n"));
+}
 TEST_CASE("Case: writing twice on the same position"){
     Notebook note;
-     for (unsigned int i=0; i<96;i++){
+     for (int i=0; i<96;i++){
          note.write(1,i,66,Direction::Horizontal,"ab");
          CHECK_THROWS(note.write(1,i,i,Direction::Horizontal,"abcd"));
      }
-     for (unsigned int i=1; i<96;i++){
+     for (int i=1; i<96;i++){
          CHECK_THROWS(note.write(1,i-1,i,Direction::Vertical,"ab"));
          CHECK_THROWS(note.write(1,i-1,i,Direction::Vertical,"ab"));
      }
@@ -46,7 +55,7 @@ TEST_CASE("case: there is infinate rows"){
     Notebook note;
     std::string s;
     for (int i=1; i<10000;i++){s+="a";}
-    unsigned int k=0;
+     int k=0;
     for(;k<100;k++){
         try{
             note.write(0,0,k,Direction::Vertical,s);}
@@ -54,12 +63,11 @@ TEST_CASE("case: there is infinate rows"){
             CHECK_EQ(true,false);
         }
     }   
-
 }
 
 TEST_CASE("case: there is infinate pages"){
     Notebook note;
-    for(unsigned int i=0; i<10000;i++){
+    for(int i=0; i<10000;i++){
         try{
             note.write(i,0,0,Direction::Horizontal,"%#!#");}
         catch(std::exception&){
@@ -107,7 +115,7 @@ TEST_CASE("case: the empty cube represent by '_' "){
     st = note.read(0,0,0,Direction::Horizontal,100);
     bool flag;
     for(unsigned long i=0; i<100;i++){
-        flag =st[i]=='_';
+        flag = st[i]=='_';
         CHECK_FALSE(!flag);} 
     note.write(0,1,40,Direction::Vertical,"my name is bird person");
     note.erase(0,1,51,Direction::Vertical,11);
@@ -117,7 +125,7 @@ TEST_CASE("case: the empty cube represent by '_' "){
         flag =st[i]=='_';
         CHECK_FALSE(!flag);}
     for(unsigned long i=76;i<100;i++){
-        flag =st[i]=='_';
+        flag = st[i]=='_';
         CHECK_FALSE(!flag);}
 }
 TEST_CASE("case: want to read above the limits of the line"){
