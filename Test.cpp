@@ -14,11 +14,12 @@ using namespace ariel;
 /* Test cases for write function */
 
 TEST_CASE("length of the line is between 0-99"){
-    Notebook note;
+    
     for ( int i=100; i<200;i++){
+        Notebook note;
         try
         {
-            note.write(1,i-100,2,Direction::Vertical,"Look at me");
+            note.write(1,i-100,0,Direction::Vertical,"Look at me");
             note.write(1,i-100,2,Direction::Horizontal,"I'm Mr. meeseeks");
         }
         catch(const std::exception& e)
@@ -26,7 +27,8 @@ TEST_CASE("length of the line is between 0-99"){
             CHECK_EQ(true,false);
         }
         
-        CHECK_THROWS(note.write(1,i,2,Direction::Vertical,"o"));
+        CHECK_THROWS(note.write(1,i-100,i,Direction::Vertical,"o"));
+        CHECK_THROWS(note.write(1,i-100,2,Direction::Vertical,"o"));
         CHECK_THROWS(note.write(1,i-100,98,Direction::Horizontal,"abc"));
     }
 }
