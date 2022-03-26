@@ -42,8 +42,7 @@ TEST_CASE("case: special chars"){
 TEST_CASE("Case: writing twice on the same position"){
     Notebook note;
      for (int i=0; i<96;i++){
-         note.write(1,i,66,Direction::Horizontal,"ab");
-         CHECK_THROWS(note.write(1,i,i,Direction::Horizontal,"abcd"));
+        note.write(1,i,i,Direction::Horizontal,"abcd");
      }
      for (int i=1; i<96;i++){
          CHECK_THROWS(note.write(1,i-1,i,Direction::Vertical,"ab"));
@@ -100,12 +99,12 @@ TEST_CASE("can't write again after earse"){
     catch(std::exception){
         CHECK_EQ(true,false);
     }
-    CHECK_THROWS(note.write(1,30,55,Direction::Vertical,"this is not gonna work"));
-        note.write(0,30,40,Direction::Vertical,"my name is bird person");
-    note.erase(0,30,51,Direction::Vertical,11);
-    note.write(0,30,62,Direction::Vertical,"Phoenixperson");
-    CHECK_EQ(note.read(0,30,40,Direction::Vertical,35),"my name is ~~~~~~~~~~~Phoenixperson");
-    CHECK_EQ(note.read(0,30,38,Direction::Vertical,39),"__my name is ~~~~~~~~~~~Phoenixperson__");
+    CHECK_THROWS(note.write(1,0,55,Direction::Vertical,"this is not gonna work"));
+        note.write(0,30,40,Direction::Horizontal,"my name is bird person");
+    note.erase(0,30,51,Direction::Horizontal,11);
+    note.write(0,30,62,Direction::Horizontal,"Phoenixperson");
+    CHECK_EQ(note.read(0,30,40,Direction::Horizontal,35),"my name is ~~~~~~~~~~~Phoenixperson");
+    CHECK_EQ(note.read(0,30,38,Direction::Horizontal,39),"__my name is ~~~~~~~~~~~Phoenixperson__");
 }
 
 /* Test cases for read function */
