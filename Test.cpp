@@ -66,7 +66,7 @@ TEST_CASE("case: there is infinate rows"){
 TEST_CASE("case: there is infinate pages"){
     Notebook note;
         try{
-            note.write(2000,0,0,Direction::Horizontal,"%#!#");}
+            note.write(5000,0,0,Direction::Horizontal,"%#!#");}
         catch(std::exception&){
             CHECK_EQ(true, false);
         }
