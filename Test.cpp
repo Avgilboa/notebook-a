@@ -55,7 +55,7 @@ TEST_CASE("Case: writing twice on the same position"){
 TEST_CASE("case: there is infinate rows"){
     Notebook note;
     std::string s;
-    for (int i=1; i<6000;i++){s+="a";}
+    for (int i=1; i<10000;i++){s+="a";}
         try{
             note.write(0,0,35,Direction::Vertical,s);}
         catch(std::exception&){
@@ -66,7 +66,7 @@ TEST_CASE("case: there is infinate rows"){
 TEST_CASE("case: there is infinate pages"){
     Notebook note;
         try{
-            note.write(10000,0,0,Direction::Horizontal,"%#!#");}
+            note.write(6000,0,0,Direction::Horizontal,"%#!#");}
         catch(std::exception&){
             CHECK_EQ(true, false);
         }
