@@ -65,11 +65,13 @@ TEST_CASE("case: there is infinate rows"){
 
 TEST_CASE("case: there is infinate pages"){
     Notebook note;
+    for(int i=0; i<1000;i+=200){
         try{
-            note.write(10000,0,0,Direction::Horizontal,"%#!#");}
+            note.write(i,0,0,Direction::Horizontal,"%#!#");}
         catch(std::exception&){
             CHECK_EQ(true, false);
         }
+    }
 }
 
 /*Test cases for earse function  */
@@ -129,4 +131,3 @@ TEST_CASE("case: want to read above the limits of the line"){
     CHECK_THROWS(note.read(0,1,100,Direction::Vertical,5));
     CHECK_THROWS(note.read(1,1,98,Direction::Horizontal,5));
 }
-
