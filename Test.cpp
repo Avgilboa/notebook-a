@@ -65,13 +65,11 @@ TEST_CASE("case: there is infinate rows"){
 
 TEST_CASE("case: there is infinate pages"){
     Notebook note;
-    for(int i=0; i<1000;i++){
         try{
-            note.write(i,0,0,Direction::Horizontal,"%#!#");}
+            note.write(10000,0,0,Direction::Horizontal,"%#!#");}
         catch(std::exception&){
             CHECK_EQ(true, false);
         }
-    }
 }
 
 /*Test cases for earse function  */
